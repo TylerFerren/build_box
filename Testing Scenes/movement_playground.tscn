@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://e4if4ni0by4u"]
+
+[ext_resource type="Texture2D" uid="uid://bknwt866khg3b" path="res://Testing Scenes/Prototype Textures/Light/texture_06.png" id="1_dua2o"]
+[ext_resource type="PackedScene" uid="uid://d3jp2hk514pud" path="res://Movement System/character.tscn" id="2_2764k"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dua2o"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_2764k"]
+sky_material = SubResource("ProceduralSkyMaterial_dua2o")
+
+[sub_resource type="Environment" id="Environment_fkub4"]
+background_mode = 2
+sky = SubResource("Sky_2764k")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_tucpo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tucpo"]
+albedo_color = Color(0.47732216, 0.47732216, 0.47732216, 1)
+albedo_texture = ExtResource("1_dua2o")
+uv1_scale = Vector3(5, 5, 5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dua2o"]
+material = SubResource("StandardMaterial3D_tucpo")
+size = Vector2(50, 50)
+
+[node name="Movement Playground" type="Node3D" unique_id=1705408102]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1615345165]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 5, 5)
+
+[node name="Character" parent="." unique_id=1777284262 instance=ExtResource("2_2764k")]
+
+[node name="Enviroment" type="Node" parent="." unique_id=750456333]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Enviroment" unique_id=1670220376]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Enviroment" unique_id=1882002218]
+environment = SubResource("Environment_fkub4")
+
+[node name="Floor" type="StaticBody3D" parent="Enviroment" unique_id=1296171027]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviroment/Floor" unique_id=1438090557]
+shape = SubResource("WorldBoundaryShape3D_tucpo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enviroment/Floor" unique_id=2019324806]
+mesh = SubResource("PlaneMesh_dua2o")

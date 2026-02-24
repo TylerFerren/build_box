@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://d3jp2hk514pud"]
+
+[ext_resource type="Script" uid="uid://d2ohf7ds5rbmg" path="res://Movement System/movement_manager.gd" id="1_kpvj4"]
+[ext_resource type="Script" uid="uid://qshp22cprl2j" path="res://Movement System/locomotion_extension.gd" id="2_enwbb"]
+[ext_resource type="Script" uid="uid://dyeggolwh22ad" path="res://Movement System/rotation_extension.gd" id="3_8t3lf"]
+[ext_resource type="Script" uid="uid://dadkiwkp3gwpd" path="res://Scripts/input_manager.gd" id="3_tr2w8"]
+[ext_resource type="Script" uid="uid://cb8syb5mbpo8w" path="res://Movement System/jump_extension.gd" id="4_h6w2c"]
+[ext_resource type="Script" uid="uid://boobqc4rsap10" path="res://Movement System/gravity_extension.gd" id="5_0fg4p"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gt3kb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gt3kb"]
+albedo_color = Color(0.65, 0.65, 0.65, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_kpvj4"]
+material = SubResource("StandardMaterial3D_gt3kb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kpvj4"]
+albedo_color = Color(0.35000002, 0.78333324, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_enwbb"]
+material = SubResource("StandardMaterial3D_kpvj4")
+radius = 0.1
+height = 0.2
+radial_segments = 32
+rings = 16
+
+[node name="Character" type="CharacterBody3D" unique_id=1777284262]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1259724504]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_gt3kb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=316915218]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_kpvj4")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=858135453]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -1)
+mesh = SubResource("SphereMesh_enwbb")
+
+[node name="MovementManager" type="Node" parent="." unique_id=198188156 node_paths=PackedStringArray("controller")]
+script = ExtResource("1_kpvj4")
+controller = NodePath("..")
+metadata/_custom_type_script = "uid://d2ohf7ds5rbmg"
+
+[node name="Locomotion" type="Node" parent="MovementManager" unique_id=1306982844]
+script = ExtResource("2_enwbb")
+metadata/_custom_type_script = "uid://qshp22cprl2j"
+
+[node name="Rotation" type="Node" parent="MovementManager" unique_id=365406913]
+script = ExtResource("3_8t3lf")
+metadata/_custom_type_script = "uid://dyeggolwh22ad"
+
+[node name="Jump" type="Node" parent="MovementManager" unique_id=894728341]
+script = ExtResource("4_h6w2c")
+metadata/_custom_type_script = "uid://cb8syb5mbpo8w"
+
+[node name="Gravity" type="Node" parent="MovementManager" unique_id=170021834]
+script = ExtResource("5_0fg4p")
+blend_mode = 3
+
+[node name="InputManager" type="Node" parent="." unique_id=107549548]
+script = ExtResource("3_tr2w8")
+metadata/_custom_type_script = "uid://dadkiwkp3gwpd"
+
+[connection signal="jump_pressed" from="InputManager" to="MovementManager/Jump" method="on_jump_pressed"]
+[connection signal="jump_released" from="InputManager" to="MovementManager/Jump" method="on_jump_released"]
+[connection signal="move" from="InputManager" to="MovementManager/Locomotion" method="set_move_input"]
+[connection signal="move" from="InputManager" to="MovementManager/Rotation" method="set_move_input"]

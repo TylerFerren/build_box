@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://bbdp7vxyby7nt"]
+
+[ext_resource type="Script" uid="uid://cddoau0ymkls2" path="res://Main Menu/main_menu_manager.gd" id="1_vccqd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rhts7"]
+font_size = 48
+
+[node name="Main Menu" type="Control" unique_id=2016940445]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vccqd")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=534170678]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 750.0
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=2087266888]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 48
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=551215958]
+layout_mode = 2
+text = "Main Menu"
+label_settings = SubResource("LabelSettings_rhts7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=215086690]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="Movement Playground" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=645112996]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Movement Playground"
+
+[node name="Stats Playground" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=158350564]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Stats Playground"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Movement Playground" to="." method="transition_to_movement_pllayground"]
