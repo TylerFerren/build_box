@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MovementModeTransitionRule" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Movement System/Core/movement_mode_transition_rule.gd" id="1_transition_rule"]
+
+[resource]
+script = ExtResource("1_transition_rule")
+from_mode = &"climb"
+to_mode = &"ground"
+minimum_time_in_mode = 0.0
+required_conditions = Array[int]([3])

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://e4if4ni0by4u"]
 
-[ext_resource type="Texture2D" uid="uid://bknwt866khg3b" path="res://Testing Scenes/Prototype Textures/Light/texture_06.png" id="1_dua2o"]
 [ext_resource type="PackedScene" uid="uid://d3jp2hk514pud" path="res://Movement System/character.tscn" id="2_2764k"]
+[ext_resource type="Material" uid="uid://djnyb0mxh7ebl" path="res://Testing Scenes/prototype_material_3d.tres" id="3_fkub4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dua2o"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -18,19 +18,22 @@ glow_enabled = true
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_tucpo"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tucpo"]
-albedo_color = Color(0.47732216, 0.47732216, 0.47732216, 1)
-albedo_texture = ExtResource("1_dua2o")
-uv1_scale = Vector3(5, 5, 5)
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_dua2o"]
-material = SubResource("StandardMaterial3D_tucpo")
+material = ExtResource("3_fkub4")
 size = Vector2(50, 50)
 
-[node name="Movement Playground" type="Node3D" unique_id=1705408102]
+[sub_resource type="BoxMesh" id="BoxMesh_fkub4"]
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1615345165]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 5, 5)
+[sub_resource type="BoxShape3D" id="BoxShape3D_dyewu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dyewu"]
+material = ExtResource("3_fkub4")
+size = Vector3(1, 5, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fkub4"]
+size = Vector3(1, 5, 10)
+
+[node name="Movement Playground" type="Node3D" unique_id=1705408102]
 
 [node name="Character" parent="." unique_id=1777284262 instance=ExtResource("2_2764k")]
 
@@ -50,3 +53,21 @@ shape = SubResource("WorldBoundaryShape3D_tucpo")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enviroment/Floor" unique_id=2019324806]
 mesh = SubResource("PlaneMesh_dua2o")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=147040279]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -10)
+mesh = SubResource("BoxMesh_fkub4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=340238914]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=1765881445]
+shape = SubResource("BoxShape3D_dyewu")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=328252066]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.670999, 2.4230747, 0)
+mesh = SubResource("BoxMesh_dyewu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2" unique_id=1121866386]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D" unique_id=1134959012]
+shape = SubResource("BoxShape3D_fkub4")

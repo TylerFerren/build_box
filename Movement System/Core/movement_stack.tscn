@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://cdywojbrdy0ry"]
+
+[ext_resource type="Script" uid="uid://d2ohf7ds5rbmg" path="res://Movement System/Core/movement_manager.gd" id="1_manager"]
+[ext_resource type="Script" uid="uid://qshp22cprl2j" path="res://Movement System/Extensions/Locomotion/locomotion_extension.gd" id="2_locomotion"]
+[ext_resource type="Script" uid="uid://dyeggolwh22ad" path="res://Movement System/Extensions/Locomotion/rotation_extension.gd" id="3_rotation"]
+[ext_resource type="Script" uid="uid://cb8syb5mbpo8w" path="res://Movement System/Extensions/Abilities/jump_extension.gd" id="4_jump"]
+[ext_resource type="Script" uid="uid://boobqc4rsap10" path="res://Movement System/Extensions/Forces/gravity_extension.gd" id="5_gravity"]
+[ext_resource type="Script" uid="uid://wunysccssy5k" path="res://Movement System/Extensions/Abilities/impulse_extension.gd" id="6_impulse"]
+[ext_resource type="Script" uid="uid://o41sluygb20o" path="res://Movement System/Extensions/Abilities/sprint_extension.gd" id="7_sprint"]
+[ext_resource type="Script" uid="uid://c4eguucfr463o" path="res://Movement System/Extensions/Abilities/crouch_extension.gd" id="8_crouch"]
+[ext_resource type="Script" uid="uid://6nji5ny11nnv" path="res://Movement System/Core/movement_mode_manager.gd" id="9_mode_manager"]
+[ext_resource type="Script" uid="uid://b1poesbob6lr0" path="res://Movement System/Core/movement_mode_profile.gd" id="10_3xh5o"]
+[ext_resource type="Resource" uid="uid://8oeacuvrq65e" path="res://Movement System/Modes/ground_mode.tres" id="10_ground_mode"]
+[ext_resource type="Script" path="res://Movement System/Core/movement_mode_transition_rule.gd" id="11_transition_rule_script"]
+[ext_resource type="Resource" path="res://Movement System/Modes/climb_mode.tres" id="12_climb_mode"]
+[ext_resource type="Resource" path="res://Movement System/Modes/Transitions/ground_to_climb_transition.tres" id="13_ground_to_climb_transition"]
+[ext_resource type="Resource" path="res://Movement System/Modes/Transitions/climb_to_ground_landed_transition.tres" id="14_climb_to_ground_landed_transition"]
+[ext_resource type="Resource" path="res://Movement System/Modes/Transitions/climb_to_ground_lost_wall_transition.tres" id="15_climb_to_ground_lost_wall_transition"]
+
+[node name="MovementManager" type="Node" node_paths=PackedStringArray("controller") unique_id=1332568435]
+script = ExtResource("1_manager")
+controller = NodePath("..")
+
+[node name="Locomotion" type="Node" parent="." unique_id=1496279402]
+script = ExtResource("2_locomotion")
+
+[node name="Rotation" type="Node" parent="." unique_id=1215030527]
+script = ExtResource("3_rotation")
+
+[node name="Jump" type="Node" parent="." unique_id=1995087346]
+script = ExtResource("4_jump")
+air_jumps = 0
+
+[node name="Gravity" type="Node" parent="." unique_id=568940944]
+script = ExtResource("5_gravity")
+blend_mode = 3
+
+[node name="Impulse" type="Node" parent="." unique_id=1677152415]
+script = ExtResource("6_impulse")
+blend_mode = 2
+
+[node name="Sprint" type="Node" parent="." unique_id=1350856342]
+script = ExtResource("7_sprint")
+sprint_speed_multiplier = 2.0
+allowed_modes = Array[StringName]([&"ground"])
+
+[node name="Crouch" type="Node" parent="." unique_id=1437202942]
+script = ExtResource("8_crouch")
+collision_shape_path = NodePath("../../CollisionShape3D")
+allowed_modes = Array[StringName]([&"ground"])
+
+[node name="ModeManager" type="Node" parent="." unique_id=1151080636]
+script = ExtResource("9_mode_manager")
+mode_profiles = Array[ExtResource("10_3xh5o")]([ExtResource("10_ground_mode"), ExtResource("12_climb_mode")])
+transition_rules = Array[ExtResource("11_transition_rule_script")]([ExtResource("13_ground_to_climb_transition"), ExtResource("14_climb_to_ground_landed_transition"), ExtResource("15_climb_to_ground_lost_wall_transition")])
+starting_mode = &"ground"

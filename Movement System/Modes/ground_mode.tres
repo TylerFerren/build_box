@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="MovementModeProfile" format=3 uid="uid://8oeacuvrq65e"]
+
+[ext_resource type="Script" uid="uid://b1poesbob6lr0" path="res://Movement System/Core/movement_mode_profile.gd" id="1_mode_profile"]
+
+[resource]
+script = ExtResource("1_mode_profile")
+mode_name = &"ground"
