@@ -1,0 +1,172 @@
+[gd_resource type="AnimationLibrary" format=3]
+
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_facial_blink01_08000.anim" id="1_5xxkl"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_facial_blink01_28000.anim" id="2_702b5"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_facial_loop01_08201.anim" id="3_7pm8i"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_facial_loop01_28201.anim" id="4_7fyi0"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_facial_mouth01_08100.anim" id="5_gsq4r"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_facial_mouth01_28100.anim" id="6_sbqje"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_alert01_20560.anim" id="7_ont8u"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_attack01_20400.anim" id="8_ddl3v"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_attack02_20410.anim" id="9_gn1w0"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_down01_20520.anim" id="10_mwmm4"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_down01_20521.anim" id="11_rq4gm"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_down01_20522.anim" id="12_d38c2"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_hit_react01_20500.anim" id="13_cnuod"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_hit_react02_20501.anim" id="14_dlue1"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_idle_battle01_20001.anim" id="15_ypga1"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_idle_relaxed01_20000.anim" id="16_rko2g"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_idle_variant01_20010.anim" id="17_ufkus"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_idle_variant02_20011.anim" id="18_rluj1"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_jump_down01_20152.anim" id="19_pue3a"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_jump_down01_20153.anim" id="20_t2olw"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_jump_up01_20150.anim" id="21_pvjqi"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_jump_up01_20151.anim" id="22_qbnhj"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_land02_20155.anim" id="23_8ibgk"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_ranged_attack01_20450.anim" id="24_8tvsg"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_ranged_attack02_20460.anim" id="25_i6nl1"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_ranged_attack02_20461.anim" id="26_6cpl8"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_ranged_attack02_20462.anim" id="27_imvod"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_roar01_20300.anim" id="28_m624h"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_run01_20100.anim" id="29_7x8dl"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_step_out01_20145.anim" id="30_lg3qh"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_step_out01_20146.anim" id="31_t8b73"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_step_out01_20147.anim" id="32_4ycr1"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_stun01_20510.anim" id="33_ayhpr"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_stun01_20511.anim" id="34_l3kev"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_stun01_20512.anim" id="35_jowaw"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_turn_20021.anim" id="36_1i5a4"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_turn_20024.anim" id="37_iipm6"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_flight_walk01_20030.anim" id="38_mskqi"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_alert01_00560.anim" id="39_fr0bc"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_angry01_00563.anim" id="40_kh4y7"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_attack01_00400.anim" id="41_bbtei"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_attack02_00410.anim" id="42_phffk"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_celebrate01_00550.anim" id="43_5aqlb"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_down01_00520.anim" id="44_2351t"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_down01_00521.anim" id="45_dyoml"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_down01_00522.anim" id="46_gjf32"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_eat01_00290.anim" id="47_24ajo"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_eat01_00291.anim" id="48_v6ry2"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_eat01_00292.anim" id="49_ysnvo"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_eat02_00293.anim" id="50_l7vgu"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_eat02_00294.anim" id="51_ag4hb"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_eat02_00295.anim" id="52_ft4i2"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_groom01_00320.anim" id="53_vs8xm"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_hit_react01_00500.anim" id="54_owq4h"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_hit_react02_00501.anim" id="55_iu6h1"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_idle_battle01_00001.anim" id="56_xadod"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_idle_relaxed01_00000.anim" id="57_psqgh"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_idle_variant01_00010.anim" id="58_mvso3"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_idle_variant02_00011.anim" id="59_l50tj"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_jump_down01_00152.anim" id="60_kseh2"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_jump_down01_00153.anim" id="61_0oqei"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_jump_up01_00150.anim" id="62_y24uo"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_jump_up01_00151.anim" id="63_d27dx"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_land02_00155.anim" id="64_tsywr"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_ranged_attack01_00450.anim" id="65_wkhxs"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_ranged_attack02_00460.anim" id="66_gja45"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_ranged_attack02_00461.anim" id="67_8xaom"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_ranged_attack02_00462.anim" id="68_msu87"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_roar01_00300.anim" id="69_0c62r"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_run01_00100.anim" id="70_s8vfq"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_sleep01_00280.anim" id="71_6b5nm"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_sleep01_00281.anim" id="72_n1wau"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_sleep01_00282.anim" id="73_n3tri"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_step_out01_00145.anim" id="74_d0owd"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_step_out01_00146.anim" id="75_deer7"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_step_out01_00147.anim" id="76_t81un"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_stun01_00510.anim" id="77_bul7c"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_stun01_00511.anim" id="78_sk7xb"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_stun01_00512.anim" id="79_fuhyp"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_turn_00021.anim" id="80_yhsnj"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_turn_00021_2.anim" id="81_146cu"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_turn_00024.anim" id="82_juptg"]
+[ext_resource type="Animation" path="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_ground_walk01_00030.anim" id="83_3eeeg"]
+
+[resource]
+_data = {
+&"charizard_facial_blink01_08000": ExtResource("1_5xxkl"),
+&"charizard_facial_blink01_28000": ExtResource("2_702b5"),
+&"charizard_facial_loop01_08201": ExtResource("3_7pm8i"),
+&"charizard_facial_loop01_28201": ExtResource("4_7fyi0"),
+&"charizard_facial_mouth01_08100": ExtResource("5_gsq4r"),
+&"charizard_facial_mouth01_28100": ExtResource("6_sbqje"),
+&"charizard_flight_alert01_20560": ExtResource("7_ont8u"),
+&"charizard_flight_attack01_20400": ExtResource("8_ddl3v"),
+&"charizard_flight_attack02_20410": ExtResource("9_gn1w0"),
+&"charizard_flight_down01_20520": ExtResource("10_mwmm4"),
+&"charizard_flight_down01_20521": ExtResource("11_rq4gm"),
+&"charizard_flight_down01_20522": ExtResource("12_d38c2"),
+&"charizard_flight_hit_react01_20500": ExtResource("13_cnuod"),
+&"charizard_flight_hit_react02_20501": ExtResource("14_dlue1"),
+&"charizard_flight_idle_battle01_20001": ExtResource("15_ypga1"),
+&"charizard_flight_idle_relaxed01_20000": ExtResource("16_rko2g"),
+&"charizard_flight_idle_variant01_20010": ExtResource("17_ufkus"),
+&"charizard_flight_idle_variant02_20011": ExtResource("18_rluj1"),
+&"charizard_flight_jump_down01_20152": ExtResource("19_pue3a"),
+&"charizard_flight_jump_down01_20153": ExtResource("20_t2olw"),
+&"charizard_flight_jump_up01_20150": ExtResource("21_pvjqi"),
+&"charizard_flight_jump_up01_20151": ExtResource("22_qbnhj"),
+&"charizard_flight_land02_20155": ExtResource("23_8ibgk"),
+&"charizard_flight_ranged_attack01_20450": ExtResource("24_8tvsg"),
+&"charizard_flight_ranged_attack02_20460": ExtResource("25_i6nl1"),
+&"charizard_flight_ranged_attack02_20461": ExtResource("26_6cpl8"),
+&"charizard_flight_ranged_attack02_20462": ExtResource("27_imvod"),
+&"charizard_flight_roar01_20300": ExtResource("28_m624h"),
+&"charizard_flight_run01_20100": ExtResource("29_7x8dl"),
+&"charizard_flight_step_out01_20145": ExtResource("30_lg3qh"),
+&"charizard_flight_step_out01_20146": ExtResource("31_t8b73"),
+&"charizard_flight_step_out01_20147": ExtResource("32_4ycr1"),
+&"charizard_flight_stun01_20510": ExtResource("33_ayhpr"),
+&"charizard_flight_stun01_20511": ExtResource("34_l3kev"),
+&"charizard_flight_stun01_20512": ExtResource("35_jowaw"),
+&"charizard_flight_turn_20021": ExtResource("36_1i5a4"),
+&"charizard_flight_turn_20024": ExtResource("37_iipm6"),
+&"charizard_flight_walk01_20030": ExtResource("38_mskqi"),
+&"charizard_ground_alert01_00560": ExtResource("39_fr0bc"),
+&"charizard_ground_angry01_00563": ExtResource("40_kh4y7"),
+&"charizard_ground_attack01_00400": ExtResource("41_bbtei"),
+&"charizard_ground_attack02_00410": ExtResource("42_phffk"),
+&"charizard_ground_celebrate01_00550": ExtResource("43_5aqlb"),
+&"charizard_ground_down01_00520": ExtResource("44_2351t"),
+&"charizard_ground_down01_00521": ExtResource("45_dyoml"),
+&"charizard_ground_down01_00522": ExtResource("46_gjf32"),
+&"charizard_ground_eat01_00290": ExtResource("47_24ajo"),
+&"charizard_ground_eat01_00291": ExtResource("48_v6ry2"),
+&"charizard_ground_eat01_00292": ExtResource("49_ysnvo"),
+&"charizard_ground_eat02_00293": ExtResource("50_l7vgu"),
+&"charizard_ground_eat02_00294": ExtResource("51_ag4hb"),
+&"charizard_ground_eat02_00295": ExtResource("52_ft4i2"),
+&"charizard_ground_groom01_00320": ExtResource("53_vs8xm"),
+&"charizard_ground_hit_react01_00500": ExtResource("54_owq4h"),
+&"charizard_ground_hit_react02_00501": ExtResource("55_iu6h1"),
+&"charizard_ground_idle_battle01_00001": ExtResource("56_xadod"),
+&"charizard_ground_idle_relaxed01_00000": ExtResource("57_psqgh"),
+&"charizard_ground_idle_variant01_00010": ExtResource("58_mvso3"),
+&"charizard_ground_idle_variant02_00011": ExtResource("59_l50tj"),
+&"charizard_ground_jump_down01_00152": ExtResource("60_kseh2"),
+&"charizard_ground_jump_down01_00153": ExtResource("61_0oqei"),
+&"charizard_ground_jump_up01_00150": ExtResource("62_y24uo"),
+&"charizard_ground_jump_up01_00151": ExtResource("63_d27dx"),
+&"charizard_ground_land02_00155": ExtResource("64_tsywr"),
+&"charizard_ground_ranged_attack01_00450": ExtResource("65_wkhxs"),
+&"charizard_ground_ranged_attack02_00460": ExtResource("66_gja45"),
+&"charizard_ground_ranged_attack02_00461": ExtResource("67_8xaom"),
+&"charizard_ground_ranged_attack02_00462": ExtResource("68_msu87"),
+&"charizard_ground_roar01_00300": ExtResource("69_0c62r"),
+&"charizard_ground_run01_00100": ExtResource("70_s8vfq"),
+&"charizard_ground_sleep01_00280": ExtResource("71_6b5nm"),
+&"charizard_ground_sleep01_00281": ExtResource("72_n1wau"),
+&"charizard_ground_sleep01_00282": ExtResource("73_n3tri"),
+&"charizard_ground_step_out01_00145": ExtResource("74_d0owd"),
+&"charizard_ground_step_out01_00146": ExtResource("75_deer7"),
+&"charizard_ground_step_out01_00147": ExtResource("76_t81un"),
+&"charizard_ground_stun01_00510": ExtResource("77_bul7c"),
+&"charizard_ground_stun01_00511": ExtResource("78_sk7xb"),
+&"charizard_ground_stun01_00512": ExtResource("79_fuhyp"),
+&"charizard_ground_turn_00021": ExtResource("80_yhsnj"),
+&"charizard_ground_turn_00021_2": ExtResource("81_146cu"),
+&"charizard_ground_turn_00024": ExtResource("82_juptg"),
+&"charizard_ground_walk01_00030": ExtResource("83_3eeeg")
+}

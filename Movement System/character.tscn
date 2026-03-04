@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dt3jr87bft2s7" path="res://Scripts/third_person_orbit_camera.gd" id="1_tr2w8"]
 [ext_resource type="Script" uid="uid://dadkiwkp3gwpd" path="res://Scripts/input_manager.gd" id="2_input_manager"]
 [ext_resource type="PackedScene" uid="uid://cdywojbrdy0ry" path="res://Movement System/Core/movement_stack.tscn" id="3_movement_stack"]
+[ext_resource type="Script" uid="uid://b5obbulc5abis" path="res://Movement System/Debug/movement_debug_overlay.gd" id="4_movement_debug_overlay"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tr2w8"]
 radius = 0.3
@@ -61,11 +62,22 @@ mesh = SubResource("SphereMesh_enwbb")
 script = ExtResource("2_input_manager")
 metadata/_custom_type_script = "uid://dadkiwkp3gwpd"
 
+[node name="MovementDebugOverlay" type="CanvasLayer" parent="." unique_id=1815216305]
+follow_viewport_enabled = true
+script = ExtResource("4_movement_debug_overlay")
+movement_manager_path = NodePath("../MovementManager")
+
 [connection signal="crouch_pressed" from="InputManager" to="MovementManager/Crouch" method="on_crouch_pressed"]
+[connection signal="crouch_pressed" from="InputManager" to="MovementManager/Flight" method="on_descend_pressed"]
 [connection signal="crouch_released" from="InputManager" to="MovementManager/Crouch" method="on_crouch_released"]
+[connection signal="crouch_released" from="InputManager" to="MovementManager/Flight" method="on_descend_released"]
 [connection signal="dash_pressed" from="InputManager" to="MovementManager/Impulse" method="on_impulse_pressed"]
+[connection signal="flight_toggle_pressed" from="InputManager" to="MovementManager/Flight" method="on_flight_toggle_pressed"]
+[connection signal="flight_transition_pressed" from="InputManager" to="MovementManager/Flight" method="on_flight_state_transition_pressed"]
 [connection signal="jump_pressed" from="InputManager" to="MovementManager/Jump" method="on_jump_pressed"]
+[connection signal="jump_pressed" from="InputManager" to="MovementManager/Flight" method="on_ascend_pressed"]
 [connection signal="jump_released" from="InputManager" to="MovementManager/Jump" method="on_jump_released"]
+[connection signal="jump_released" from="InputManager" to="MovementManager/Flight" method="on_ascend_released"]
 [connection signal="move" from="InputManager" to="MovementManager" method="set_move_input"]
 [connection signal="move" from="InputManager" to="MovementManager/Impulse" method="set_directional_input"]
 [connection signal="sprint_pressed" from="InputManager" to="MovementManager/Sprint" method="on_sprint_pressed"]

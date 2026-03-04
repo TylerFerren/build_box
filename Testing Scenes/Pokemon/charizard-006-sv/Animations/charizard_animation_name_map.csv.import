@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://yf8hf2g14i0o"
+
+[deps]
+
+files=["res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_animation_name_map.exported.translation", "res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_animation_name_map.length.translation", "res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_animation_name_map.loop.translation"]
+
+source_file="res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_animation_name_map.csv"
+dest_files=["res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_animation_name_map.exported.translation", "res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_animation_name_map.length.translation", "res://Testing Scenes/Pokemon/charizard-006-sv/Animations/charizard_animation_name_map.loop.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

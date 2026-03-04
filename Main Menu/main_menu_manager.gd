@@ -6,5 +6,8 @@ func transition_to_scene(new_scene : PackedScene):
 func transition_to_main_menu():
 	get_tree().change_scene_to_file("res://Main Menu/main_menu.tscn")
 
-func transition_to_movement_pllayground():
+func transition_to_movement_playground():
 	get_tree().change_scene_to_file("res://Testing Scenes/movement_playground.tscn")
+	
+func transition_to_kanto():
+	get_tree().change_scene_to_file("res://Testing Scenes/Pokemon/kanto.tscn")

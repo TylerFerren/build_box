@@ -16,6 +16,7 @@ var move_input: Vector2 = Vector2.ZERO
 var mode_speed_multiplier: float = 1.0
 var mode_gravity_scale: float = 1.0
 var current_mode: StringName = StringName()
+var requested_mode_change: StringName = StringName()
 
 func _ready() -> void:
 	_ensure_controller_and_camera_are_assigned()
@@ -49,6 +50,8 @@ func _ready() -> void:
 			mode_manager.mode_changed.connect(_on_mode_changed)
 			current_mode = mode_manager.current_mode
 
+	call_deferred("_validate_configuration")
+
 func _physics_process(delta: float) -> void:
 	if controller == null:
 		_ensure_controller_and_camera_are_assigned()
@@ -59,6 +62,7 @@ func _physics_process(delta: float) -> void:
 
 	var movement_state := _create_movement_state(delta)
 	_update_extension_states(movement_state, delta)
+	_apply_requested_mode_change()
 	_evaluate_mode_transitions(movement_state, delta)
 	_sync_mode_name_to_state(movement_state)
 
@@ -105,14 +109,19 @@ func _create_movement_state(delta: float) -> MovementState:
 
 func _update_extension_states(movement_state: MovementState, delta: float) -> void:
 	for extension in extensions:
-		if not extension.is_mode_allowed(movement_state.current_mode):
-			continue
 		extension.update_extension_state(movement_state, delta)
 
 func _evaluate_mode_transitions(movement_state: MovementState, delta: float) -> void:
 	if mode_manager == null:
 		return
 	mode_manager.evaluate_mode_transitions(movement_state, delta)
+
+func _apply_requested_mode_change() -> void:
+	if requested_mode_change == StringName():
+		return
+	if mode_manager != null:
+		mode_manager.set_mode(requested_mode_change)
+	requested_mode_change = StringName()
 
 func _sync_mode_name_to_state(movement_state: MovementState) -> void:
 	var speed_modifier_factor: float = 1.0
@@ -132,20 +141,20 @@ func _sync_mode_name_to_state(movement_state: MovementState) -> void:
 func _resolve_movement_velocity(movement_state: MovementState, delta: float) -> Vector3:
 	var constant_velocity: Vector3 = Vector3.ZERO
 	for extension in constant_extensions:
-		if extension.is_active and extension.affects_movement and extension.is_mode_allowed(movement_state.current_mode):
+		if extension.is_active and extension.affects_movement:
 			constant_velocity += extension.get_movement_velocity(movement_state, delta)
 
 	for extension in overriding_extensions:
-		if extension.is_active and extension.affects_movement and extension.is_mode_allowed(movement_state.current_mode):
+		if extension.is_active and extension.affects_movement:
 			return constant_velocity + extension.get_movement_velocity(movement_state, delta)
 
 	var blended_velocity: Vector3 = Vector3.ZERO
 	for extension in additive_extensions:
-		if extension.is_active and extension.affects_movement and extension.is_mode_allowed(movement_state.current_mode):
+		if extension.is_active and extension.affects_movement:
 			blended_velocity += extension.get_movement_velocity(movement_state, delta)
 
 	for extension in subtractive_extensions:
-		if extension.is_active and extension.affects_movement and extension.is_mode_allowed(movement_state.current_mode):
+		if extension.is_active and extension.affects_movement:
 			blended_velocity -= extension.get_movement_velocity(movement_state, delta)
 
 	return constant_velocity + blended_velocity
@@ -153,20 +162,20 @@ func _resolve_movement_velocity(movement_state: MovementState, delta: float) -> 
 func _resolve_rotation_euler(movement_state: MovementState, delta: float) -> Vector3:
 	var constant_rotation: Vector3 = Vector3.ZERO
 	for extension in constant_extensions:
-		if extension.is_active and extension.affects_rotation and extension.is_mode_allowed(movement_state.current_mode):
+		if extension.is_active and extension.affects_rotation:
 			constant_rotation += extension.get_rotation_euler(movement_state, delta)
 
 	for extension in overriding_extensions:
-		if extension.is_active and extension.affects_rotation and extension.is_mode_allowed(movement_state.current_mode):
+		if extension.is_active and extension.affects_rotation:
 			return constant_rotation + extension.get_rotation_euler(movement_state, delta)
 
 	var blended_rotation: Vector3 = Vector3.ZERO
 	for extension in additive_extensions:
-		if extension.is_active and extension.affects_rotation and extension.is_mode_allowed(movement_state.current_mode):
+		if extension.is_active and extension.affects_rotation:
 			blended_rotation += extension.get_rotation_euler(movement_state, delta)
 
 	for extension in subtractive_extensions:
-		if extension.is_active and extension.affects_rotation and extension.is_mode_allowed(movement_state.current_mode):
+		if extension.is_active and extension.affects_rotation:
 			blended_rotation -= extension.get_rotation_euler(movement_state, delta)
 
 	return constant_rotation + blended_rotation
@@ -207,9 +216,22 @@ func get_camera_relative_input(input_vector: Vector3) -> Vector3:
 func set_move_input(input_value: Vector2) -> void:
 	move_input = input_value
 
+func request_mode_change(mode_name: StringName) -> void:
+	requested_mode_change = mode_name
+
 func set_mode_multipliers(speed_multiplier: float, gravity_scale: float) -> void:
 	mode_speed_multiplier = speed_multiplier
 	mode_gravity_scale = gravity_scale
 
 func _on_mode_changed(_previous_mode: StringName, next_mode: StringName) -> void:
 	current_mode = next_mode
+
+func _validate_configuration() -> void:
+	if controller == null:
+		push_warning("MovementManager controller is not assigned.")
+	if camera == null:
+		push_warning("MovementManager camera is not assigned. Using viewport active camera fallback.")
+	if mode_manager == null:
+		push_warning("MovementManager has no MovementModeManager child.")
+	if extensions.is_empty():
+		push_warning("MovementManager has no MovementExtension children.")

@@ -11,13 +11,19 @@ signal sprint_exited
 
 var sprint_pressed_requested: bool = false
 var sprint_released_requested: bool = false
+var default_sprint_speed_multiplier: float = 0.0
+var default_require_grounded: bool = true
+var default_require_move_input: bool = true
+var default_use_toggle_input: bool = false
 
 func _ready() -> void:
 	affects_movement = false
 	affects_rotation = false
-	if allowed_modes.is_empty():
-		allowed_modes = [&"ground"]
-	is_active = false
+	default_sprint_speed_multiplier = sprint_speed_multiplier
+	default_require_grounded = require_grounded
+	default_require_move_input = require_move_input
+	default_use_toggle_input = use_toggle_input
+	request_active_state(false)
 
 func on_sprint_pressed() -> void:
 	sprint_pressed_requested = true
@@ -27,15 +33,18 @@ func on_sprint_released() -> void:
 
 func update_extension_state(movement_state: MovementState, _delta: float) -> void:
 	var was_active: bool = is_active
+	var requested_active_state: bool = is_active
 
 	if use_toggle_input:
 		if sprint_pressed_requested:
-			is_active = not is_active
+			requested_active_state = not is_active
 	else:
 		if sprint_pressed_requested:
-			is_active = true
+			requested_active_state = true
 		if sprint_released_requested:
-			is_active = false
+			requested_active_state = false
+
+	request_active_state(requested_active_state)
 
 	sprint_pressed_requested = false
 	sprint_released_requested = false
@@ -53,3 +62,9 @@ func update_extension_state(movement_state: MovementState, _delta: float) -> voi
 		return
 
 	movement_state.speed_multiplier *= sprint_speed_multiplier
+
+func clear_mode_override() -> void:
+	sprint_speed_multiplier = default_sprint_speed_multiplier
+	require_grounded = default_require_grounded
+	require_move_input = default_require_move_input
+	use_toggle_input = default_use_toggle_input

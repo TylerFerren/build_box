@@ -10,6 +10,16 @@ var target_direction: Vector3 = Vector3.ZERO
 var smoothed_direction: Vector3 = Vector3.ZERO
 var target_speed: float = 0.0
 var smoothed_speed: float = 0.0
+var default_speed: float = 0.0
+var default_acceleration: float = 0.0
+var default_deceleration: float = 0.0
+var default_directional_acceleration: float = 0.0
+
+func _ready() -> void:
+	default_speed = speed
+	default_acceleration = acceleration
+	default_deceleration = deceleration
+	default_directional_acceleration = directional_acceleration
 
 func get_movement_velocity(movement_state: MovementState, delta: float) -> Vector3:
 	var move_input_direction := Vector3(movement_state.move_input.x, 0.0, movement_state.move_input.y)
@@ -31,3 +41,9 @@ func get_movement_velocity(movement_state: MovementState, delta: float) -> Vecto
 		smoothed_speed = lerp(smoothed_speed, target_speed, deceleration * delta)
 
 	return smoothed_speed * smoothed_direction
+
+func clear_mode_override() -> void:
+	speed = default_speed
+	acceleration = default_acceleration
+	deceleration = default_deceleration
+	directional_acceleration = default_directional_acceleration

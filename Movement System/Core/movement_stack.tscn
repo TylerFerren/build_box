@@ -8,16 +8,18 @@
 [ext_resource type="Script" uid="uid://wunysccssy5k" path="res://Movement System/Extensions/Abilities/impulse_extension.gd" id="6_impulse"]
 [ext_resource type="Script" uid="uid://o41sluygb20o" path="res://Movement System/Extensions/Abilities/sprint_extension.gd" id="7_sprint"]
 [ext_resource type="Script" uid="uid://c4eguucfr463o" path="res://Movement System/Extensions/Abilities/crouch_extension.gd" id="8_crouch"]
+[ext_resource type="Script" uid="uid://c6vyt8bn3kiiu" path="res://Movement System/Extensions/Traversal/climb_extension.gd" id="9_climb"]
 [ext_resource type="Script" uid="uid://6nji5ny11nnv" path="res://Movement System/Core/movement_mode_manager.gd" id="9_mode_manager"]
-[ext_resource type="Script" uid="uid://b1poesbob6lr0" path="res://Movement System/Core/movement_mode_profile.gd" id="10_3xh5o"]
-[ext_resource type="Resource" uid="uid://8oeacuvrq65e" path="res://Movement System/Modes/ground_mode.tres" id="10_ground_mode"]
-[ext_resource type="Script" path="res://Movement System/Core/movement_mode_transition_rule.gd" id="11_transition_rule_script"]
-[ext_resource type="Resource" path="res://Movement System/Modes/climb_mode.tres" id="12_climb_mode"]
-[ext_resource type="Resource" path="res://Movement System/Modes/Transitions/ground_to_climb_transition.tres" id="13_ground_to_climb_transition"]
-[ext_resource type="Resource" path="res://Movement System/Modes/Transitions/climb_to_ground_landed_transition.tres" id="14_climb_to_ground_landed_transition"]
-[ext_resource type="Resource" path="res://Movement System/Modes/Transitions/climb_to_ground_lost_wall_transition.tres" id="15_climb_to_ground_lost_wall_transition"]
+[ext_resource type="Script" uid="uid://bigajdvirrbhi" path="res://Movement System/Extensions/Traversal/flight_extension.gd" id="10_flight"]
+[ext_resource type="Script" uid="uid://boptnjf4yvk0d" path="res://Movement System/Core/movement_mode.gd" id="10_mode_node"]
+[ext_resource type="Script" uid="uid://cg1ocbrpmhq28" path="res://Movement System/Core/movement_mode_transition_rule.gd" id="11_transition_rule_script"]
+[ext_resource type="Resource" uid="uid://brdbkp0eq1bh3" path="res://Movement System/Modes/Transitions/walking_to_climbing_transition.tres" id="13_ground_to_climb_transition"]
+[ext_resource type="Resource" uid="uid://c5b6e7yejhfgm" path="res://Movement System/Modes/Transitions/climbing_to_walking_landed_transition.tres" id="14_climb_to_ground_landed_transition"]
+[ext_resource type="Resource" uid="uid://dn2dk474bi7qn" path="res://Movement System/Modes/Transitions/climbing_to_walking_lost_wall_transition.tres" id="15_climb_to_ground_lost_wall_transition"]
+[ext_resource type="Resource" uid="uid://oloprbc21co4" path="res://Movement System/Modes/Transitions/flying_to_walking_landed_transition.tres" id="16_flight_to_ground_landed_transition"]
+[ext_resource type="Script" uid="uid://hxrrki62jjo2" path="res://Movement System/Extensions/Locomotion/Overrides/rotation_extension_override.gd" id="19_1k0ws"]
 
-[node name="MovementManager" type="Node" node_paths=PackedStringArray("controller") unique_id=1332568435]
+[node name="MovementManager" type="Node" unique_id=1332568435]
 script = ExtResource("1_manager")
 controller = NodePath("..")
 
@@ -26,6 +28,8 @@ script = ExtResource("2_locomotion")
 
 [node name="Rotation" type="Node" parent="." unique_id=1215030527]
 script = ExtResource("3_rotation")
+affects_movement = false
+affects_rotation = true
 
 [node name="Jump" type="Node" parent="." unique_id=1995087346]
 script = ExtResource("4_jump")
@@ -42,15 +46,52 @@ blend_mode = 2
 [node name="Sprint" type="Node" parent="." unique_id=1350856342]
 script = ExtResource("7_sprint")
 sprint_speed_multiplier = 2.0
-allowed_modes = Array[StringName]([&"ground"])
 
 [node name="Crouch" type="Node" parent="." unique_id=1437202942]
 script = ExtResource("8_crouch")
 collision_shape_path = NodePath("../../CollisionShape3D")
-allowed_modes = Array[StringName]([&"ground"])
+
+[node name="Climb" type="Node" parent="." unique_id=1534096606]
+script = ExtResource("9_climb")
+lower_wall_probe_height = 0.5
+affects_rotation = true
+
+[node name="Flight" type="Node" parent="." unique_id=1641173671]
+script = ExtResource("10_flight")
+horizontal_flight_speed = 3.0
+vertical_flight_speed = 4.0
 
 [node name="ModeManager" type="Node" parent="." unique_id=1151080636]
 script = ExtResource("9_mode_manager")
-mode_profiles = Array[ExtResource("10_3xh5o")]([ExtResource("10_ground_mode"), ExtResource("12_climb_mode")])
-transition_rules = Array[ExtResource("11_transition_rule_script")]([ExtResource("13_ground_to_climb_transition"), ExtResource("14_climb_to_ground_landed_transition"), ExtResource("15_climb_to_ground_lost_wall_transition")])
-starting_mode = &"ground"
+starting_mode = &"walking"
+
+[node name="WalkingMode" type="Node" parent="ModeManager" unique_id=566718654]
+script = ExtResource("10_mode_node")
+mode_name = &"walking"
+disabled_extensions = Array[NodePath]([NodePath("Flight")])
+transition_rules = Array[ExtResource("11_transition_rule_script")]([ExtResource("13_ground_to_climb_transition")])
+
+[node name="ClimbingMode" type="Node" parent="ModeManager" unique_id=2034152677]
+script = ExtResource("10_mode_node")
+mode_name = &"climbing"
+movement_speed_multiplier = 0.65
+gravity_scale = 0.0
+enabled_extensions = Array[NodePath]([NodePath("Climb")])
+disabled_extensions = Array[NodePath]([NodePath("Locomotion"), NodePath("Flight")])
+transition_rules = Array[ExtResource("11_transition_rule_script")]([ExtResource("14_climb_to_ground_landed_transition"), ExtResource("15_climb_to_ground_lost_wall_transition")])
+
+[node name="FlyingMode" type="Node" parent="ModeManager" unique_id=1382140583]
+script = ExtResource("10_mode_node")
+mode_name = &"flying"
+movement_speed_multiplier = 1.25
+gravity_scale = 0.0
+enabled_extensions = Array[NodePath]([NodePath("Flight")])
+disabled_extensions = Array[NodePath]([NodePath("Locomotion"), NodePath("Jump"), NodePath("Climb"), NodePath("Sprint"), NodePath("Crouch")])
+transition_rules = Array[ExtResource("11_transition_rule_script")]([ExtResource("16_flight_to_ground_landed_transition")])
+
+[node name="RotationExtensionOverride" type="Node" parent="ModeManager/FlyingMode" unique_id=1697770828]
+script = ExtResource("19_1k0ws")
+override_rotation_driver = true
+rotation_driver = 2
+override_lock_upright = true
+lock_upright = false

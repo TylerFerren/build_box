@@ -44,9 +44,16 @@ layout_mode = 2
 size_flags_horizontal = 0
 text = "Movement Playground"
 
+[node name="Kanto Playground" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1550140263]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Kanto Playground
+"
+
 [node name="Stats Playground" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=158350564]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Stats Playground"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Movement Playground" to="." method="transition_to_movement_pllayground"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Movement Playground" to="." method="transition_to_movement_playground"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Kanto Playground" to="." method="transition_to_kanto"]

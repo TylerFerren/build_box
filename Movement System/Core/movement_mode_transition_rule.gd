@@ -17,6 +17,7 @@ enum TransitionCondition {
 @export var from_mode: StringName = StringName()
 @export var to_mode: StringName = StringName()
 @export var minimum_time_in_mode: float = 0.0
+@export var cooldown_duration: float = 0.0
 @export var required_conditions: Array[TransitionCondition] = []
 @export var speed_threshold: float = 0.0
 

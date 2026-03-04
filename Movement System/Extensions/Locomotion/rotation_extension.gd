@@ -8,15 +8,30 @@ enum RotationDriver {MOVEMENT_DIRECTION, INPUT_DIRECTION, FOLLOW_CAMERA, CURSOR_
 @export var only_rotate_on_move : bool = false
 @export var lock_upright : bool = true
 @export var cursor_ray_length : float = 1000.0
-
+@export var input_deadzone: float = 0.05
+@export var direction_deadzone: float = 0.0001
 
 var target_direction: Vector3 = Vector3.ZERO
 var target_rotation: Vector3 = Vector3.ZERO
 var smooth_rotation: Vector3 = Vector3.ZERO
+var default_rotation_driver: RotationDriver = RotationDriver.MOVEMENT_DIRECTION
+var default_rotation_speed: float = 0.0
+var default_only_rotate_on_move: bool = false
+var default_lock_upright: bool = true
+var default_cursor_ray_length: float = 0.0
+var default_input_deadzone: float = 0.0
+var default_direction_deadzone: float = 0.0
 
 func _ready() -> void:
 	affects_movement = false
 	affects_rotation = true
+	default_rotation_driver = rotation_driver
+	default_rotation_speed = rotation_speed
+	default_only_rotate_on_move = only_rotate_on_move
+	default_lock_upright = lock_upright
+	default_cursor_ray_length = cursor_ray_length
+	default_input_deadzone = input_deadzone
+	default_direction_deadzone = direction_deadzone
 
 func get_rotation_euler(movement_state: MovementState, delta: float) -> Vector3:
 	match rotation_driver:
@@ -29,7 +44,11 @@ func get_rotation_euler(movement_state: MovementState, delta: float) -> Vector3:
 		RotationDriver.CURSOR_BASED:
 			_rotate_towards_cursor(movement_state)
 
-	if only_rotate_on_move and target_direction.length_squared() == 0.0:
+	var has_rotation_direction: bool = target_direction.length_squared() > direction_deadzone
+	if not has_rotation_direction:
+		return smooth_rotation
+
+	if only_rotate_on_move and movement_state.move_input.length() <= input_deadzone:
 		return smooth_rotation
 	
 	var horizontal_length := Vector2(target_direction.x, target_direction.z).length()
@@ -54,12 +73,20 @@ func _rotate_towards_movement(movement_state: MovementState) -> void:
 	target_direction = movement_state.current_velocity.slide(movement_state.up_direction)
 	if lock_upright:
 		target_direction.y = 0.0
+	if target_direction.length_squared() <= direction_deadzone:
+		target_direction = Vector3.ZERO
 
 func _rotate_towards_input(movement_state: MovementState) -> void:
+	if movement_state.move_input.length() <= input_deadzone:
+		target_direction = Vector3.ZERO
+		return
+
 	var input_direction := Vector3(movement_state.move_input.x, 0.0, movement_state.move_input.y)
 	target_direction = manager.get_camera_relative_input(input_direction)
 	if lock_upright:
 		target_direction.y = 0.0
+	if target_direction.length_squared() <= direction_deadzone:
+		target_direction = Vector3.ZERO
 
 func _rotate_following_camera(movement_state: MovementState) -> void:
 	var active_camera := _get_active_camera(movement_state)
@@ -70,6 +97,8 @@ func _rotate_following_camera(movement_state: MovementState) -> void:
 	target_direction = -active_camera.global_basis.z
 	if lock_upright:
 		target_direction.y = 0.0
+	if target_direction.length_squared() <= direction_deadzone:
+		target_direction = Vector3.ZERO
 
 func _rotate_towards_cursor(movement_state: MovementState) -> void:
 	var active_camera := _get_active_camera(movement_state)
@@ -102,8 +131,19 @@ func _rotate_towards_cursor(movement_state: MovementState) -> void:
 
 	if lock_upright:
 		target_direction.y = 0.0
+	if target_direction.length_squared() <= direction_deadzone:
+		target_direction = Vector3.ZERO
 
 func _get_active_camera(movement_state: MovementState) -> Camera3D:
 	if movement_state.camera != null:
 		return movement_state.camera
 	return get_viewport().get_camera_3d()
+
+func clear_mode_override() -> void:
+	rotation_driver = default_rotation_driver
+	rotation_speed = default_rotation_speed
+	only_rotate_on_move = default_only_rotate_on_move
+	lock_upright = default_lock_upright
+	cursor_ray_length = default_cursor_ray_length
+	input_deadzone = default_input_deadzone
+	direction_deadzone = default_direction_deadzone

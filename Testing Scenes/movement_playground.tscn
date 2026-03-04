@@ -28,10 +28,10 @@ size = Vector2(50, 50)
 
 [sub_resource type="BoxMesh" id="BoxMesh_dyewu"]
 material = ExtResource("3_fkub4")
-size = Vector3(1, 5, 10)
+size = Vector3(1, 10, 15)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fkub4"]
-size = Vector3(1, 5, 10)
+size = Vector3(1, 10, 15)
 
 [node name="Movement Playground" type="Node3D" unique_id=1705408102]
 
@@ -64,7 +64,7 @@ mesh = SubResource("BoxMesh_fkub4")
 shape = SubResource("BoxShape3D_dyewu")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=328252066]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.670999, 2.4230747, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.670999, 4.703738, 0)
 mesh = SubResource("BoxMesh_dyewu")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2" unique_id=1121866386]

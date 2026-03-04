@@ -22,10 +22,24 @@ var momentum_velocity: Vector3 = Vector3.ZERO
 var current_floor_normal: Vector3 = Vector3.UP
 var is_impulse_requested: bool = false
 var did_emit_finished_signal: bool = false
+var default_impulse_distance: float = 0.0
+var default_impulse_speed: float = 0.0
+var default_recovery_time: float = 0.0
+var default_lift_height: float = 0.0
+var default_enable_momentum: bool = false
+var default_momentum_drag: float = 0.0
+var default_use_camera_relative_direction: bool = true
 
 func _ready() -> void:
 	blend_mode = MovementExtension.ExtensionBlendMode.OVERRIDING
-	is_active = false
+	default_impulse_distance = impulse_distance
+	default_impulse_speed = impulse_speed
+	default_recovery_time = recovery_time
+	default_lift_height = lift_height
+	default_enable_momentum = enable_momentum
+	default_momentum_drag = momentum_drag
+	default_use_camera_relative_direction = use_camera_relative_direction
+	request_active_state(false)
 
 func on_impulse_pressed() -> void:
 	is_impulse_requested = true
@@ -50,12 +64,12 @@ func update_extension_state(movement_state: MovementState, delta: float) -> void
 
 	var is_currently_impulsing := remaining_impulse_time > 0.0
 	if is_currently_impulsing:
-		is_active = true
+		request_active_state(true)
 	else:
 		if enable_momentum and momentum_velocity.length_squared() > 0.0001:
-			is_active = true
+			request_active_state(true)
 		else:
-			is_active = false
+			request_active_state(false)
 			if not did_emit_finished_signal:
 				impulse_finished.emit()
 				impulse_exited.emit()
@@ -114,3 +128,12 @@ func _get_lift_velocity(_delta: float) -> Vector3:
 	var impulse_progress := 1.0 - (remaining_impulse_time / impulse_duration)
 	var lift_speed := lift_height * sin(PI * impulse_progress)
 	return manager.controller.up_direction * lift_speed
+
+func clear_mode_override() -> void:
+	impulse_distance = default_impulse_distance
+	impulse_speed = default_impulse_speed
+	recovery_time = default_recovery_time
+	lift_height = default_lift_height
+	enable_momentum = default_enable_momentum
+	momentum_drag = default_momentum_drag
+	use_camera_relative_direction = default_use_camera_relative_direction

@@ -25,8 +25,28 @@ var is_jump_press_requested: bool = false
 var is_jump_release_requested: bool = false
 var wall_jump_push_velocity: Vector3 = Vector3.ZERO
 var wall_jump_cooldown_remaining: float = 0.0
+var is_deactivation_requested: bool = false
+var default_jump_height: float = 0.0
+var default_air_jumps: int = 0
+var default_fast_fall_multiplier: float = 0.0
+var default_low_jump_multiplier: float = 0.0
+var default_coyote_time: float = 0.0
+var default_enable_wall_jump: bool = true
+var default_wall_jump_push_speed: float = 0.0
+var default_wall_jump_push_dampening: float = 0.0
+var default_wall_jump_cooldown: float = 0.0
 
 func _ready() -> void:
+	default_jump_height = jump_height
+	default_air_jumps = air_jumps
+	default_fast_fall_multiplier = fast_fall_multiplier
+	default_low_jump_multiplier = low_jump_multiplier
+	default_coyote_time = coyote_time
+	default_enable_wall_jump = enable_wall_jump
+	default_wall_jump_push_speed = wall_jump_push_speed
+	default_wall_jump_push_dampening = wall_jump_push_dampening
+	default_wall_jump_cooldown = wall_jump_cooldown
+
 	gravity_magnitude = _get_gravity_magnitude()
 
 func on_jump_pressed() -> void:
@@ -36,6 +56,10 @@ func on_jump_released() -> void:
 	is_jump_release_requested = true
 
 func update_extension_state(movement_state: MovementState, delta: float) -> void:
+	if is_deactivation_requested:
+		request_active_state(false)
+		is_deactivation_requested = false
+
 	if wall_jump_cooldown_remaining > 0.0:
 		wall_jump_cooldown_remaining = max(wall_jump_cooldown_remaining - delta, 0.0)
 
@@ -74,7 +98,7 @@ func _try_jump(movement_state: MovementState) -> void:
 
 	active_fast_fall_multiplier = 1.0
 	active_low_jump_multiplier = 1.0
-	is_active = true
+	request_active_state(true)
 
 	if used_wall_jump:
 		wall_jump_push_velocity = _get_wall_jump_push_direction(movement_state) * wall_jump_push_speed
@@ -104,7 +128,7 @@ func get_movement_velocity(movement_state: MovementState, delta: float) -> Vecto
 		movement_velocity += wall_jump_push_velocity
 
 	if jump_velocity <= 0.0 and wall_jump_push_velocity.length_squared() <= 0.0001:
-		is_active = false
+		is_deactivation_requested = true
 
 	return movement_velocity
 
@@ -145,3 +169,14 @@ func _get_wall_jump_push_direction(movement_state: MovementState) -> Vector3:
 	if fallback_forward.length_squared() > 0.0:
 		return fallback_forward.normalized()
 	return Vector3.FORWARD
+
+func clear_mode_override() -> void:
+	jump_height = default_jump_height
+	air_jumps = default_air_jumps
+	fast_fall_multiplier = default_fast_fall_multiplier
+	low_jump_multiplier = default_low_jump_multiplier
+	coyote_time = default_coyote_time
+	enable_wall_jump = default_enable_wall_jump
+	wall_jump_push_speed = default_wall_jump_push_speed
+	wall_jump_push_dampening = default_wall_jump_push_dampening
+	wall_jump_cooldown = default_wall_jump_cooldown

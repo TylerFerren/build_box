@@ -4,24 +4,29 @@ extends Node
 
 enum ExtensionBlendMode {ADDITIVE, SUBTRACTIVE, OVERRIDING, CONSTANT}
 
+signal extension_entered
+signal extension_exited
+signal extension_active_changed(is_active: bool)
+
 var manager :  MovementManager
 @export var blend_mode : ExtensionBlendMode = ExtensionBlendMode.ADDITIVE
 @export var affects_movement: bool = true
 @export var affects_rotation: bool = false
-@export var allowed_modes: Array[StringName] = []
-@export var blocked_modes: Array[StringName] = []
 
 var is_active : bool = true
 
 func set_active(value: bool) -> void:
-	is_active = value
+	request_active_state(value)
 
-func is_mode_allowed(mode_name: StringName) -> bool:
-	if not allowed_modes.is_empty() and not allowed_modes.has(mode_name):
-		return false
-	if blocked_modes.has(mode_name):
-		return false
-	return true
+func request_active_state(should_be_active: bool) -> void:
+	if is_active == should_be_active:
+		return
+	is_active = should_be_active
+	extension_active_changed.emit(is_active)
+	if is_active:
+		extension_entered.emit()
+	else:
+		extension_exited.emit()
 
 func update_extension_state(_movement_state: MovementState, _delta: float) -> void:
 	pass
@@ -31,3 +36,6 @@ func get_movement_velocity(_movement_state: MovementState, _delta: float) -> Vec
 
 func get_rotation_euler(_movement_state: MovementState, _delta: float) -> Vector3:
 	return Vector3.ZERO
+
+func clear_mode_override() -> void:
+	pass

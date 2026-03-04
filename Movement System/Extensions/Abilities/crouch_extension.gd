@@ -19,13 +19,23 @@ var collision_shape_node: CollisionShape3D
 var capsule_shape: CapsuleShape3D
 var default_capsule_height: float = 0.0
 var default_collision_shape_position: Vector3 = Vector3.ZERO
+var default_crouch_speed_multiplier: float = 0.0
+var default_crouch_height_scale: float = 0.0
+var default_crouch_transition_speed: float = 0.0
+var default_use_toggle_input: bool = false
+var default_require_headroom_to_stand: bool = true
+var default_stand_check_margin: float = 0.0
 
 func _ready() -> void:
 	affects_movement = false
 	affects_rotation = false
-	if allowed_modes.is_empty():
-		allowed_modes = [&"ground"]
-	is_active = false
+	default_crouch_speed_multiplier = crouch_speed_multiplier
+	default_crouch_height_scale = crouch_height_scale
+	default_crouch_transition_speed = crouch_transition_speed
+	default_use_toggle_input = use_toggle_input
+	default_require_headroom_to_stand = require_headroom_to_stand
+	default_stand_check_margin = stand_check_margin
+	request_active_state(false)
 	_cache_collision_shape()
 
 func on_crouch_pressed() -> void:
@@ -53,7 +63,7 @@ func update_extension_state(movement_state: MovementState, delta: float) -> void
 	if not requested_active_state and is_active and require_headroom_to_stand and not _can_stand():
 		requested_active_state = true
 
-	is_active = requested_active_state
+	request_active_state(requested_active_state)
 
 	crouch_pressed_requested = false
 	crouch_released_requested = false
@@ -123,3 +133,11 @@ func _can_stand() -> bool:
 	var space_state := manager.controller.get_world_3d().direct_space_state
 	var raycast_hit := space_state.intersect_ray(ray_query)
 	return not raycast_hit.has("position")
+
+func clear_mode_override() -> void:
+	crouch_speed_multiplier = default_crouch_speed_multiplier
+	crouch_height_scale = default_crouch_height_scale
+	crouch_transition_speed = default_crouch_transition_speed
+	use_toggle_input = default_use_toggle_input
+	require_headroom_to_stand = default_require_headroom_to_stand
+	stand_check_margin = default_stand_check_margin
